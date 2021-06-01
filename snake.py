@@ -9,7 +9,8 @@ import time
 import random
  
 pygame.init()
- 
+
+grey = (128,128,128)
 white = (255, 255, 255)
 yellow = (255, 255, 102)
 black = (0, 0, 0)
@@ -21,7 +22,7 @@ dis_width = 600
 dis_height = 400
  
 dis = pygame.display.set_mode((dis_width, dis_height))
-pygame.display.set_caption('Snake Game by Edureka')
+pygame.display.set_caption('Snake Game by mitch')
  
 clock = pygame.time.Clock()
  
@@ -32,13 +33,13 @@ font_style = pygame.font.SysFont("bahnschrift", 25)
 score_font = pygame.font.SysFont("comicsansms", 35)
  
  
-def Your_score(score):
-    value = score_font.render("Your Score: " + str(score), True, yellow)
+def score(score):
+    value = score_font.render("Your Score: " + str(score), True, white)
     dis.blit(value, [0, 0])
  
  
  
-def our_snake(snake_block, snake_list):
+def snake(snake_block, snake_list):
     for x in snake_list:
         pygame.draw.rect(dis, black, [x[0], x[1], snake_block, snake_block])
  
@@ -67,9 +68,9 @@ def gameLoop():
     while not game_over:
  
         while game_close == True:
-            dis.fill(blue)
+            dis.fill(grey)
             message("You Lost! Press C-Play Again or Q-Quit", red)
-            Your_score(Length_of_snake - 1)
+            score(Length_of_snake - 1)
             pygame.display.update()
  
             for event in pygame.event.get():
@@ -101,7 +102,7 @@ def gameLoop():
             game_close = True
         x1 += x1_change
         y1 += y1_change
-        dis.fill(blue)
+        dis.fill(grey)
         pygame.draw.rect(dis, green, [foodx, foody, snake_block, snake_block])
         snake_Head = []
         snake_Head.append(x1)
@@ -114,8 +115,8 @@ def gameLoop():
             if x == snake_Head:
                 game_close = True
  
-        our_snake(snake_block, snake_List)
-        Your_score(Length_of_snake - 1)
+        snake(snake_block, snake_List)
+        score(Length_of_snake - 1)
  
         pygame.display.update()
  
